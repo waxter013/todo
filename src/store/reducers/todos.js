@@ -1,74 +1,36 @@
+import { createReducer } from "./_reducer-utils";
 import initialState from '../';
-
-/**
- * Create a redux reducer given an object of actions mapped to their handler functions.
- * @param initialState - The applications initial state (optional).
- * @param handlers - An object of actions mapped to their handler functions
- * @returns {function} - A reducer function
- */
-function createReducer(initialState, handlers) {
-
-    return function reducer(state = initialState, action) {
-
-        // Call and return the action handler (if it exists)
-        if (handlers.hasOwnProperty(action.type)) {
-            return handlers[action.type](state, action)
-        }
-        // Return the state object
-        else {
-            return state
-        }
-    }
-}
+import { makeTodo } from "../recordFactories";
 
 /**
  * ToDo actions mapped to their handler functions
  * @type {Object}
  */
 const todosHandler = {
-    'addToDo' (state, action) {
-        return Object.assign({}, state, {
-            toDoLists: [{
-                ...state.toDoLists[0],
-                todos: [
-                    ...state.toDoLists[0].todos,
-                    {
-                        id: state.toDoLists[0].todos.length,
-                        text: action.text,
-                        completed: false
-                    }
-                ]
-            }]
+    'addToDo' (todos, {listId, text, time}) {
+        const newTodo = makeTodo({
+            listId: listId,
+            id: todos.size,
+            text: text,
+            time: time
         });
+
+        return todos.push(newTodo);
     },
 
-    'deleteToDo' (state, action) {
-        return Object.assign({}, state,
-            {
-                toDoLists: [{
-                    ...state.toDoLists[0],
-                    todos: state.toDoLists[0].todos.map(todo =>
-                        (todo.id === action.id)
-                            ? {...todo, isDeleted: !todo.isDeleted}
-                            : todo
-                        )
-                }]
-            }
+    'deleteToDo' (todos, {id}) {
+        return todos.map(todo =>
+            (todo.get('id') === id)
+                ? todo.update('isDeleted', value => !value)
+                : todo
         );
     },
 
-    'completeToDo' (state, action) {
-        return Object.assign({}, state,
-            {
-                toDoLists: [{
-                    ...state.toDoLists[0],
-                    todos: state.toDoLists[0].todos.map(todo =>
-                        (todo.id === action.id)
-                            ? {...todo, isCompleted: !todo.isCompleted}
-                            : todo
-                    )
-                }]
-            }
+    'completeToDo' (todos, {listId, id}) {
+        return todos.map(todo =>
+            (todo.get('listId') === listId && todo.get('id') === id)
+                ? todo.update('isCompleted', value => !value)
+                : todo
         );
     }
 };
@@ -77,6 +39,4 @@ const todosHandler = {
  * A reducer function for ToDos
  * @type {function}
  */
-const todos = createReducer(initialState, todosHandler);
-
-export default todos;
+export default createReducer(initialState, todosHandler);

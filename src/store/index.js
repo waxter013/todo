@@ -2,31 +2,29 @@
  * The initial state of the Redux store
  */
 
-let storeWithoutIDs = {
-    toDoLists: [
-        {
-            name: 'To Do App, Baby!',
-            todos: [
-                {text: 'Item 1', isCompleted: false, isDeleted: false},
-                {text: 'Item 2', isCompleted: false, isDeleted: false}
-            ]
-        }
-    ]
-};
+import { List } from 'immutable';
+import { makeTodo, makeList} from './recordFactories';
 
-//Object.assign({}, storeWithoutIDs, {});
+// Create store data
+const todos = List([
+        makeTodo({text: 'Item 1'}),
+        makeTodo({id: 1, text: 'Item 2'}),
+        makeTodo({listId: 1, text: 'L1'}),
+        makeTodo({listId: 1, id: 1, text: 'L2'})
+    ]);
 
-const store = {};
-store.toDoLists = storeWithoutIDs.toDoLists.map((list, index) => {
-    // Add IDs to each toDoList
-    Object.defineProperty(list, 'id', {value: index, writable: true, configurable: true, enumerable: true});
+const lists = List([
+        makeList({
+            id: 0,
+            name: 'To Do App, Baby!'
+        }),
+        makeList({
+            id: 1,
+            name: 'List 2'
+        })
+    ]);
 
-    list.todos = list.todos.map((todo, i) => {
-        // Add IDs to each todo
-        Object.defineProperty(todo, 'id', {value: i, writable: true, configurable: true, enumerable: true});
-        return todo;
-    });
-    return list;
-});
+// Create store with data
+const store = {activeList: 0, lists, todos};
 
 export default store;

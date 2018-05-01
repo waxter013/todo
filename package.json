@@ -4,12 +4,17 @@
   "private": true,
   "dependencies": {
     "aphrodite": "^2.1.0",
+    "gsap": "^1.20.4",
+    "immutable": "^3.8.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-gsap-enhancer": "^0.3.0",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.1",
+    "react-transition-group": "^2.3.1",
     "redux": "^3.7.2",
-    "rmwc": "^1.4.1"
+    "rmwc": "^1.4.1",
+    "victory": "^0.25.7"
   },
   "scripts": {
     "start": "react-scripts start",

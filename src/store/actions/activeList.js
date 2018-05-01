@@ -1,0 +1,8 @@
+///////////////////////////////////
+// activeList Actions
+///////////////////////////////////
+
+export const showList = (id) => ({
+    type: 'showList',
+    id
+});
