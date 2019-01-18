@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { Checkbox } from '@rmwc/checkbox';
-import { IconToggle } from 'rmwc/IconToggle';
+import { IconButton } from 'rmwc/IconButton';
 import {
     ListItem,
     ListItemText,
@@ -23,11 +23,10 @@ class ToDo extends Component {
                     {this.props.text}
                     <ListItemSecondaryText>{this.props.time}</ListItemSecondaryText>
                 </ListItemText>
-                <IconToggle
+                <IconButton
                     checked={this.props.isDeleted}
                     onChange={this.props.toggleDelete}
-                    on={{label: 'Undo Delete', content: 'add'}}
-                    off={{label: 'Delete Todo', content: 'delete'}}
+                    icon="delete"
                     className={css(styles.deleteBttn)}
                 />
             </ListItem>

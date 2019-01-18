@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Fab } from '@rmwc/Fab';
+import { Fab } from '@rmwc/fab';
 import { IconButton } from '@rmwc/icon-button';
 import { TextField } from '@rmwc/textfield';
 import CircularSlider from '../../components/CircularSlider/CircularSlider';

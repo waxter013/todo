@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Drawer, DrawerContent} from 'rmwc/Drawer';
 import { List, ListItem, ListItemGraphic, ListItemText} from '@rmwc/list';
-import { Fab } from '@rmwc/Fab';
+import { Fab } from '@rmwc/fab';
 import { IconButton } from '@rmwc/icon-button';
 import { TextField } from '@rmwc/textfield';
 import NavItem from './NavItem'
@@ -87,8 +87,7 @@ class ListsNav extends Component {
         return (
             <div>
                 {/* Navbar */}
-                <Drawer temporary open={open} onClose={closeNav}>
-                    {/*<DrawerHeader/>*/}
+                <Drawer modal open={open} onClose={closeNav}>
                     <DrawerContent>
                         <List>
 
@@ -110,15 +109,9 @@ class ListsNav extends Component {
 
                 {/* Add To Do List Form */}
                 <form className={css(styles.addListForm)} style={{display: this.display()}}>
-                    <IconButton
-                        onClick={this.hideAddListForm}>
-                        close
-                    </IconButton>
+                    <IconButton icon="close" onClick={this.hideAddListForm}/>
                     <TextField required fullwidth label="List Name" onChange={this.updateText} value={listName}/>
-                    <Fab
-                        onClick={this.submit}>
-                        done
-                    </Fab>
+                    <Fab icon="done" onClick={this.submit}/>
                 </form>
             </div>
         );

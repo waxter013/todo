@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { ListItem, ListItemText, ListItemMeta } from '@rmwc/list';
-import { IconToggle } from 'rmwc/IconToggle';
+import { IconButton } from 'rmwc/IconButton';
 
 // import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
@@ -9,7 +9,7 @@ import { deleteList } from "../../../store/actions/lists";
 class NavItem extends Component {
 
     render () {
-        const {list, deleteList, onClick} = this.props;
+        const { list, deleteList, onClick } = this.props;
 
         return (
             <ListItem key={list.id} onClick={onClick}>
@@ -17,11 +17,10 @@ class NavItem extends Component {
                     {list.name}
                 </ListItemText>
                 <ListItemMeta>
-                    <IconToggle
+                    <IconButton
                         checked={list.isDeleted}
                         onChange={() => deleteList(list.id)}
-                        on={{label: 'Undo Delete', content: 'add'}}
-                        off={{label: 'Delete Todo', content: 'delete'}}
+                        icon="delete"
                     />
                 </ListItemMeta>
             </ListItem>
