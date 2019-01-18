@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+/** Eventually replace Toolbar with TopAppBar when the features catch up */
 import {
     Toolbar,
     ToolbarRow,
@@ -27,7 +28,7 @@ class ListHeader extends Component {
 }
 
 const mapStateToProps = state => {
-    const {activeList: listId, lists, todos} = state;
+    const {activeList: listId, lists} = state;
 
     return {
         listName: getList(lists, listId).get('name'),

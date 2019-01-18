@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import { ListItem, ListItemText, ListItemMeta } from 'rmwc/List';
+import { ListItem, ListItemText, ListItemMeta } from '@rmwc/list';
 import { IconToggle } from 'rmwc/IconToggle';
 
-import { StyleSheet, css } from 'aphrodite';
+// import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-import { deleteList } from "../../store/actions/lists";
+import { deleteList } from "../../../store/actions/lists";
 
 class NavItem extends Component {
 

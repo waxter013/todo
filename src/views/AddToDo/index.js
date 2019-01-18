@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Fab } from 'rmwc/Fab';
-import { TextField } from 'rmwc/TextField';
-import CircularSlider from '../../components/CircularSlider/CircularSlider.jsx';
+import { Fab } from '@rmwc/Fab';
+import { IconButton } from '@rmwc/icon-button';
+import { TextField } from '@rmwc/textfield';
+import CircularSlider from '../../components/CircularSlider/CircularSlider';
 
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
@@ -88,17 +89,14 @@ class AddToDo extends Component {
         return (
             <Transition timeout={300} in={showForm} onEnter={() => {console.log('enter')}} onExit={() => {console.log('exit')}}>
                 <div>
+                    {/* This is the addToDoForm */}
                     <form className={css(styles.addToDoForm)} style={{display: this.display()}}>
+                        <IconButton icon="close" className={css(styles.closeToDoFormButton)} onClick={this.toggleForm}/>
                         <TextField required fullwidth label="I want to.." onChange={this.updateText} value={toDoText}/>
                         <CircularSlider onChange={this.updateTime} value={toDoTime} height={(window.innerHeight - 36 - 56)/2} width={window.innerWidth}/>
-                        <Fab
-                            onClick={this.submit}>
-                            done
-                        </Fab>
+                        <Fab icon="done" onClick={this.submit}/>
                     </form>
-                    <Fab className={css(styles.addTrigger)}
-                         onClick={this.toggleForm}
-                    >add</Fab>
+                    <Fab icon="add" className={css(styles.addButton)} onClick={this.toggleForm}/>
                 </div>
             </Transition>
         );
@@ -107,7 +105,13 @@ class AddToDo extends Component {
 
 
 const styles = StyleSheet.create({
-    addTrigger: {
+    closeToDoFormButton: {
+        position: 'absolute',
+        top: '2rem',
+        right: '2rem',
+        zIndex: 5
+    },
+    addButton: {
         position: 'fixed',
         bottom: '2rem',
         right: '2rem',

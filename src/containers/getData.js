@@ -1,10 +1,10 @@
 /**
- * getData - Helper functions for getting data from the store
+ * Helper functions for getting data from the store
  */
 
 
 /**
- * Get todos by filter
+ * Get a filtered list of todos
  * @param todos - A list of unfiltered todos
  * @param filter - The filter keyword. Valid filters are 'DELETED', 'COMPLETED', 'ACTIVE', or 'ALL'. Defaults to 'ALL'.
  * @returns A list of filtered todos
@@ -34,7 +34,7 @@ export const getTodos = (todos, listId) => {
 };
 
 /**
- * Get lists by filter
+ * Get a filtered list of lists
  * @param lists - A list of unfiltered lists
  * @param filter - The filter keyword. Valid filters are 'DELETED', 'COMPLETED', 'ACTIVE', or 'ALL'. Defaults to 'ALL'.
  * @returns A list of filtered lists

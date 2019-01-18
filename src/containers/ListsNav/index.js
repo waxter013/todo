@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import { Drawer, DrawerHeader, DrawerContent} from 'rmwc/Drawer';
-import { List, ListItem, ListItemGraphic, ListItemText, ListItemMeta } from 'rmwc/List';
-import { Fab } from 'rmwc/Fab';
-import { TextField } from 'rmwc/TextField';
-import { IconToggle } from 'rmwc/IconToggle';
-import NavItem from '../NavItem'
+import { Drawer, DrawerContent} from 'rmwc/Drawer';
+import { List, ListItem, ListItemGraphic, ListItemText} from '@rmwc/list';
+import { Fab } from '@rmwc/Fab';
+import { IconButton } from '@rmwc/icon-button';
+import { TextField } from '@rmwc/textfield';
+import NavItem from './NavItem'
 
 import { StyleSheet, css } from 'aphrodite';
 import { getVisibleLists } from '../getData';
@@ -108,8 +108,12 @@ class ListsNav extends Component {
                     </DrawerContent>
                 </Drawer>
 
-                {/* Add To Do Form */}
+                {/* Add To Do List Form */}
                 <form className={css(styles.addListForm)} style={{display: this.display()}}>
+                    <IconButton
+                        onClick={this.hideAddListForm}>
+                        close
+                    </IconButton>
                     <TextField required fullwidth label="List Name" onChange={this.updateText} value={listName}/>
                     <Fab
                         onClick={this.submit}>

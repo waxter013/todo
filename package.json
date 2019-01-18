@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@rmwc/checkbox": "^4.0.6",
+    "@rmwc/icon-button": "^4.0.6",
+    "@rmwc/list": "^4.0.6",
     "aphrodite": "^2.1.0",
     "gsap": "^1.20.4",
     "immutable": "^3.8.2",
@@ -13,7 +16,7 @@
     "react-scripts": "1.1.1",
     "react-transition-group": "^2.3.1",
     "redux": "^3.7.2",
-    "rmwc": "^1.4.1",
+    "rmwc": "^4.0.6",
     "victory": "^0.25.7"
   },
   "scripts": {

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { Checkbox } from 'rmwc/Checkbox';
+import { Checkbox } from '@rmwc/checkbox';
 import { IconToggle } from 'rmwc/IconToggle';
 import {
     ListItem,
     ListItemText,
     ListItemSecondaryText,
     ListItemGraphic
-} from 'rmwc/List';
+} from '@rmwc/list';
 
 class ToDo extends Component {
 

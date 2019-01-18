@@ -1,27 +1,7 @@
 import React, {Component} from 'react';
+import { toDegrees, toRadians } from '../../utilities/math'
 
-/**
- * Returns a number whose value is limited to the given range.
- *
- * Example: limit the output of this computation to between 0 and 255
- * (x * 255).clamp(0, 255)
- *
- * @param {Number} min The lower boundary of the output range
- * @param {Number} max The upper boundary of the output range
- * @returns A number in the range [min, max]
- */
-function clamp(min, max) {
-    return Math.min(Math.max(this, min), max);
-}
-
-function toDegrees(angle) {
-    return angle / (Math.PI / 180);
-}
-
-function toRadians(angle) {
-    return angle * (Math.PI / 180);
-}
-
+/* Not sure why this comment is here, but don't delete it unless you verify that it's not useful */
 // class CircularSlider extends Component {
 //
 //   constructor (props) {

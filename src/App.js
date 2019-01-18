@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+/* TODO: Convert these list-related components into a List view */
 import ListHeader from './containers/ListHeader';
 import ListsNav from './containers/ListsNav';
-import AddToDo from './containers/AddToDo';
 import FilteredToDoList from './containers/FilteredToDoList';
+import AddToDo from './views/AddToDo';
 import { StyleSheet, css } from 'aphrodite';
 
 class App extends Component {

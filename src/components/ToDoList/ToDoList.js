@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ToDo from '../ToDo/ToDo.js';
-import { List } from 'rmwc/List';
+import { List } from '@rmwc/list';
 import { StyleSheet, css } from 'aphrodite';
 
 class ToDoList extends Component {
