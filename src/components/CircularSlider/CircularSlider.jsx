@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { toDegrees, toRadians } from '../../utilities/math'
+import { toDegrees, toRadians } from '../../utilities/math';
+import { StyleSheet, css } from 'aphrodite';
 
 /* Not sure why this comment is here, but don't delete it unless you verify that it's not useful */
 // class CircularSlider extends Component {
@@ -19,54 +20,10 @@ import { toDegrees, toRadians } from '../../utilities/math'
 //       angle: this.getAngle(this.props.value, this.props.maxValue)
 //     };
 //
-//     this.cartesianToPolar = this.cartesianToPolar.bind(this);
-//     this.polarToCartesian = this.polarToCartesian.bind(this);
 //     this.adjustCoord = this.adjustCoord.bind(this);
 //     this.getAngle = this.getAngle.bind(this);
-//     this.startSliderBttnMove = this.startSliderBttnMove.bind(this);
-//     this.stopSliderBttnMove = this.stopSliderBttnMove.bind(this);
-//     this.moveSliderBttn = this.moveSliderBttn.bind(this);
 //   }
 //
-//   /**
-//    * Convert an angle to an x, y coordinate
-//    * @param angle - The angle
-//    * @return Object - An object containing x, y values
-//    */
-//   polarToCartesian (angle) {
-//     const {cx, cy, r} = this.state,
-//         a = (angle - 270) * Math.PI / 180.0,
-//         x = cx + (r * Math.cos(a)),
-//         y = cy + (r * Math.sin(a));
-//
-//     return {x, y}
-//   }
-//
-//   /**
-//    * Convert an x, y coordinate to an angle
-//    * @param x - The x coord
-//    * @param y - The y coord
-//    * @return number - An angle
-//    */
-//   cartesianToPolar (x, y) {
-//     const {cx, cy} = this.state;
-//
-//     // Angle in degrees
-//     let angle = Math.atan( (y - cy) / (x - cx));
-//
-//     // Convert Radians to Degrees
-//     angle /= (Math.PI / 180);
-//
-//     // Adjust for negative x and y values
-//     if (x < cx) {
-//       angle += 180;
-//     }
-//     else if (y < cy) {
-//       angle += 360;
-//     }
-//
-//     return Math.round(angle);
-//   }
 //
 //   /**
 //    * Adjust an x, y coordinate so that it's within the circle
@@ -92,47 +49,6 @@ import { toDegrees, toRadians } from '../../utilities/math'
 //    */
 //   getAngle (value, maxValue) {
 //     return Math.max(value, maxValue) / maxValue * 360;
-//   }
-//
-//   /**
-//    * Allow the slider button to be moved
-//    */
-//   startSliderBttnMove (e) {
-//     this.setState(() => ({
-//       isDragging: true
-//     }));
-//   }
-//
-//   /**
-//    * Disallow the slider button from being moved
-//    */
-//   stopSliderBttnMove (e) {
-//     if (this.state.isDragging) {
-//       const x = e.clientX,
-//           y = e.clientY;
-//
-//       this.setState(() => ({
-//           isDragging: false,
-//           angle: this.cartesianToPolar(x, y)
-//       }));
-//     }
-//   }
-//
-//   /**
-//    * Handle moving of slider button
-//    */
-//   moveSliderBttn (e) {
-//
-//     if (this.state.isDragging) {
-//
-//       const x = e.clientX,
-//           y = e.clientY;
-//
-//       this.setState(() => ({
-//           angle: this.cartesianToPolar(x, y),
-//           value: this.getAngle()
-//       }));
-//     }
 //   }
 //
 //   componentWillMount () {
@@ -235,7 +151,7 @@ class CircularSlider extends Component {
      */
     coordToAngle (x, y) {
         const {cx, cy} = this.state;
-
+        
         let angle = Math.atan((y - cy) / (x - cx));
 
         // Adjust for negative x and y values
@@ -271,13 +187,12 @@ class CircularSlider extends Component {
      * Calculate all relevant values for the progress meter
      */
     calculateProgressCircle (startAngle = 0, endAngle) {
-
         startAngle = toRadians(startAngle) %  (2 * Math.PI);
         endAngle = toRadians(endAngle) % (2 * Math.PI);
 
         const {x: fromX, y: fromY} = this.angleToCoord(startAngle);
         const {x: toX, y: toY} = this.angleToCoord(endAngle);
-
+        
         return {
             fromX,
             fromY,
@@ -310,10 +225,19 @@ class CircularSlider extends Component {
     moveSliderBttn (e) {
 
         if (this.state.isDragging) {
-
-            const x = e.clientX,
-                y = e.clientY;
-
+            
+            let x, y;
+            // Touch Position
+            if (e instanceof TouchEvent) {
+              x = e.touches[0].clientX;
+              y = e.touches[0].clientY;
+            }
+            // Mouse Position
+            else {
+              x = e.clientX;
+              y = e.clientY;
+            }
+          
             this.setState(() => ({
                 angle: this.coordToAngle(x, y)
             }));
@@ -326,12 +250,20 @@ class CircularSlider extends Component {
         document.addEventListener('mouseup', this.stopSliderBttnMove, false);
         document.addEventListener('mouseleave', this.stopSliderBttnMove, false);
         document.addEventListener('mousemove', this.moveSliderBttn, false);
+      
+        document.addEventListener('touchend', this.stopSliderBttnMove, false);
+        // document.addEventListener('touchcancel', this.stopSliderBttnMove, false);
+        document.addEventListener('touchmove', this.moveSliderBttn, false);
     }
 
     componentWillUnmount () {
         document.removeEventListener('mouseup', this.stopSliderBttnMove, false);
         document.removeEventListener('mouseleave', this.stopSliderBttnMove, false);
         document.removeEventListener('mousemove', this.moveSliderBttn, false);
+      
+        document.removeEventListener('touchend', this.stopSliderBttnMove, false);
+        // document.removeEventListener('touchcancel', this.stopSliderBttnMove, false);
+        document.removeEventListener('touchmove', this.moveSliderBttn, false);
     }
 
     render () {
@@ -341,7 +273,7 @@ class CircularSlider extends Component {
 
         return (
             <div>
-                <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+                <svg className={css(styles.noselect)} width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
 
                     {/* Slider */}
                     <circle cx={cx} cy={cy} r={r} stroke='#eee' strokeWidth={strokeWidth} fill='none'/>
@@ -352,7 +284,7 @@ class CircularSlider extends Component {
 
                     {/* Slider Button */}
                     <g transform={`translate( ${toX}, ${toY} )`}>
-                        <circle cx={0} cy={0} r={sliderBttnSize} fill={meterColor} onMouseDown={this.startSliderBttnMove}/>
+                        <circle cx={0} cy={0} r={sliderBttnSize} fill={meterColor} onMouseDown={this.startSliderBttnMove} onTouchStart={this.startSliderBttnMove}/>
                         <text key={angle + ''} x={0} y={-10} fontSize={10} fill={textColor} textAnchor="middle">{angle+''}</text>
                     </g>
                 </svg>
@@ -360,6 +292,12 @@ class CircularSlider extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+  noselect: {
+    userSelect: 'none'
+  }
+});
 
 CircularSlider.defaultProps = {
     height: 100,
