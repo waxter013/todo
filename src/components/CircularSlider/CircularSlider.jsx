@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { toDegrees, toRadians } from '../../utilities/math'
+import { toDegrees, toRadians } from '../../utilities/math';
+import { StyleSheet, css } from 'aphrodite';
 
 /* Not sure why this comment is here, but don't delete it unless you verify that it's not useful */
 // class CircularSlider extends Component {
@@ -357,7 +358,7 @@ class CircularSlider extends Component {
 
         return (
             <div>
-                <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+                <svg className={css(styles.noselect)} width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
 
                     {/* Slider */}
                     <circle cx={cx} cy={cy} r={r} stroke='#eee' strokeWidth={strokeWidth} fill='none'/>
@@ -376,6 +377,12 @@ class CircularSlider extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+  noselect: {
+    userSelect: 'none'
+  }
+});
 
 CircularSlider.defaultProps = {
     height: 100,
