@@ -20,54 +20,10 @@ import { StyleSheet, css } from 'aphrodite';
 //       angle: this.getAngle(this.props.value, this.props.maxValue)
 //     };
 //
-//     this.cartesianToPolar = this.cartesianToPolar.bind(this);
-//     this.polarToCartesian = this.polarToCartesian.bind(this);
 //     this.adjustCoord = this.adjustCoord.bind(this);
 //     this.getAngle = this.getAngle.bind(this);
-//     this.startSliderBttnMove = this.startSliderBttnMove.bind(this);
-//     this.stopSliderBttnMove = this.stopSliderBttnMove.bind(this);
-//     this.moveSliderBttn = this.moveSliderBttn.bind(this);
 //   }
 //
-//   /**
-//    * Convert an angle to an x, y coordinate
-//    * @param angle - The angle
-//    * @return Object - An object containing x, y values
-//    */
-//   polarToCartesian (angle) {
-//     const {cx, cy, r} = this.state,
-//         a = (angle - 270) * Math.PI / 180.0,
-//         x = cx + (r * Math.cos(a)),
-//         y = cy + (r * Math.sin(a));
-//
-//     return {x, y}
-//   }
-//
-//   /**
-//    * Convert an x, y coordinate to an angle
-//    * @param x - The x coord
-//    * @param y - The y coord
-//    * @return number - An angle
-//    */
-//   cartesianToPolar (x, y) {
-//     const {cx, cy} = this.state;
-//
-//     // Angle in degrees
-//     let angle = Math.atan( (y - cy) / (x - cx));
-//
-//     // Convert Radians to Degrees
-//     angle /= (Math.PI / 180);
-//
-//     // Adjust for negative x and y values
-//     if (x < cx) {
-//       angle += 180;
-//     }
-//     else if (y < cy) {
-//       angle += 360;
-//     }
-//
-//     return Math.round(angle);
-//   }
 //
 //   /**
 //    * Adjust an x, y coordinate so that it's within the circle
@@ -93,47 +49,6 @@ import { StyleSheet, css } from 'aphrodite';
 //    */
 //   getAngle (value, maxValue) {
 //     return Math.max(value, maxValue) / maxValue * 360;
-//   }
-//
-//   /**
-//    * Allow the slider button to be moved
-//    */
-//   startSliderBttnMove (e) {
-//     this.setState(() => ({
-//       isDragging: true
-//     }));
-//   }
-//
-//   /**
-//    * Disallow the slider button from being moved
-//    */
-//   stopSliderBttnMove (e) {
-//     if (this.state.isDragging) {
-//       const x = e.clientX,
-//           y = e.clientY;
-//
-//       this.setState(() => ({
-//           isDragging: false,
-//           angle: this.cartesianToPolar(x, y)
-//       }));
-//     }
-//   }
-//
-//   /**
-//    * Handle moving of slider button
-//    */
-//   moveSliderBttn (e) {
-//
-//     if (this.state.isDragging) {
-//
-//       const x = e.clientX,
-//           y = e.clientY;
-//
-//       this.setState(() => ({
-//           angle: this.cartesianToPolar(x, y),
-//           value: this.getAngle()
-//       }));
-//     }
 //   }
 //
 //   componentWillMount () {
