@@ -44,21 +44,6 @@ import { StyleSheet, css } from 'aphrodite';
 //     return {x, y};
 //   }
 //
-//   /**
-//    * Returns the angle of the circle
-//    */
-//   getAngle (value, maxValue) {
-//     return Math.max(value, maxValue) / maxValue * 360;
-//   }
-//
-//   componentWillMount () {
-//     document.addEventListener('mouseup', this.stopSliderBttnMove, false);
-//   }
-//
-//   componentWillUnmount () {
-//     document.removeEventListener('mouseup', this.stopSliderBttnMove, false);
-//   }
-//
 //   render () {
 //     const {width, height, meterColor, textColor, strokeWidth, sliderBttnSize} = this.props,
 //         {cx, cy, r, value} = this.state,
@@ -246,7 +231,7 @@ class CircularSlider extends Component {
         }
     }
 
-    componentWillMount () {
+    componentDidMount () {
         document.addEventListener('mouseup', this.stopSliderBttnMove, false);
         document.addEventListener('mouseleave', this.stopSliderBttnMove, false);
         document.addEventListener('mousemove', this.moveSliderBttn, false);
