@@ -235,7 +235,7 @@ class CircularSlider extends Component {
      */
     coordToAngle (x, y) {
         const {cx, cy} = this.state;
-
+        
         let angle = Math.atan((y - cy) / (x - cx));
 
         // Adjust for negative x and y values
@@ -271,13 +271,12 @@ class CircularSlider extends Component {
      * Calculate all relevant values for the progress meter
      */
     calculateProgressCircle (startAngle = 0, endAngle) {
-
         startAngle = toRadians(startAngle) %  (2 * Math.PI);
         endAngle = toRadians(endAngle) % (2 * Math.PI);
 
         const {x: fromX, y: fromY} = this.angleToCoord(startAngle);
         const {x: toX, y: toY} = this.angleToCoord(endAngle);
-
+        
         return {
             fromX,
             fromY,
@@ -310,10 +309,19 @@ class CircularSlider extends Component {
     moveSliderBttn (e) {
 
         if (this.state.isDragging) {
-
-            const x = e.clientX,
-                y = e.clientY;
-
+            
+            let x, y;
+            // Touch Position
+            if (e instanceof TouchEvent) {
+              x = e.touches[0].clientX;
+              y = e.touches[0].clientY;
+            }
+            // Mouse Position
+            else {
+              x = e.clientX;
+              y = e.clientY;
+            }
+          
             this.setState(() => ({
                 angle: this.coordToAngle(x, y)
             }));
@@ -326,12 +334,20 @@ class CircularSlider extends Component {
         document.addEventListener('mouseup', this.stopSliderBttnMove, false);
         document.addEventListener('mouseleave', this.stopSliderBttnMove, false);
         document.addEventListener('mousemove', this.moveSliderBttn, false);
+      
+        document.addEventListener('touchend', this.stopSliderBttnMove, false);
+        // document.addEventListener('touchcancel', this.stopSliderBttnMove, false);
+        document.addEventListener('touchmove', this.moveSliderBttn, false);
     }
 
     componentWillUnmount () {
         document.removeEventListener('mouseup', this.stopSliderBttnMove, false);
         document.removeEventListener('mouseleave', this.stopSliderBttnMove, false);
         document.removeEventListener('mousemove', this.moveSliderBttn, false);
+      
+        document.removeEventListener('touchend', this.stopSliderBttnMove, false);
+        // document.removeEventListener('touchcancel', this.stopSliderBttnMove, false);
+        document.removeEventListener('touchmove', this.moveSliderBttn, false);
     }
 
     render () {
@@ -352,7 +368,7 @@ class CircularSlider extends Component {
 
                     {/* Slider Button */}
                     <g transform={`translate( ${toX}, ${toY} )`}>
-                        <circle cx={0} cy={0} r={sliderBttnSize} fill={meterColor} onMouseDown={this.startSliderBttnMove}/>
+                        <circle cx={0} cy={0} r={sliderBttnSize} fill={meterColor} onMouseDown={this.startSliderBttnMove} onTouchStart={this.startSliderBttnMove}/>
                         <text key={angle + ''} x={0} y={-10} fontSize={10} fill={textColor} textAnchor="middle">{angle+''}</text>
                     </g>
                 </svg>
