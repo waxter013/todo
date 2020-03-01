@@ -1,0 +1,22 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
+    - name: Merge Pal
+      uses: maxkomarychev/merge-pal-action@v0.5.1
+      with:
+        # Token to perform api calls
+        token: be5e60472431709649dfa9fba0e1a63328f9b80a
