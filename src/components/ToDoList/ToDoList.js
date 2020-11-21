@@ -11,7 +11,7 @@ class ToDoList extends Component {
                 <List tag="ul" twoLine>
                     {this.props.todos.map((todo) => {
                         return (
-                            <ToDo text={todo.text} time={todo.time} isCompleted={todo.isCompleted} isDeleted={todo.isDeleted} toggleComplete={() => {this.props.toggleComplete(this.props.listId, todo.id)}} toggleDelete={() => {this.props.toggleDelete(this.props.listId, todo.id)}} key={todo.id}/>
+                            <ToDo text={todo.text} time={todo.time} isCompleted={todo.isCompleted} isDeleted={todo.isDeleted} toggleComplete={() => {this.props.toggleComplete(this.props.listId, todo.id)}} toggleDelete={() => this.props.toggleDelete(this.props.listId, todo.id)} key={todo.id}/>
                         );
                     })}
                 </List>
