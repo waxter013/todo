@@ -25,7 +25,7 @@ class ToDo extends Component {
                 </ListItemText>
                 <IconButton
                     checked={this.props.isDeleted}
-                    onChange={this.props.toggleDelete}
+                    onClick={this.props.toggleDelete}
                     icon="delete"
                     className={css(styles.deleteBttn)}
                 />
