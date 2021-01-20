@@ -7,7 +7,7 @@
     "@rmwc/icon-button": "^4.0.6",
     "@rmwc/list": "^4.0.6",
     "aphrodite": "^2.4.0",
-    "gsap": "^1.20.6",
+    "gsap": "^3.6.0",
     "immutable": "^3.8.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
