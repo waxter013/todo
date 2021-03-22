@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 /** Eventually replace Toolbar with TopAppBar when the features catch up */
 import {
     Toolbar,
