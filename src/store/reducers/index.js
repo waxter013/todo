@@ -1,16 +1,15 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
 import activeList from './activeList'
+import focusMode from './focusMode'
 import lists from './lists';
-// import visibilityFilter from './visibilityFilter'
+import todos from './todos'
 
 /**
  * Combine all reducer functions into a single reducer function the can be passed to createStore();
  */
 export default combineReducers({
-    activeList: activeList,
-    todos: todos,
-    lists: lists
-    // visibilityFilter
-
+    activeList,
+    'isFocusMode': focusMode,
+    todos,
+    lists
 });

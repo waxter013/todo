@@ -1,5 +1,4 @@
 import { createReducer } from "./_reducer-utils";
-import initialState from '../';
 import { makeTodo } from "../recordFactories";
 
 /**
@@ -39,4 +38,4 @@ const todosHandler = {
  * A reducer function for ToDos
  * @type {function}
  */
-export default createReducer(initialState, todosHandler);
+export default createReducer(todosHandler);

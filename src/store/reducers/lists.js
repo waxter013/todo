@@ -1,5 +1,4 @@
 import { createReducer } from "./_reducer-utils";
-import initialState from '../';
 import { makeList } from "../recordFactories";
 
 /**
@@ -26,4 +25,4 @@ const listsHandler = {
  * A reducer function for Lists
  * @type {function}
  */
-export default createReducer(initialState, listsHandler);;
+export default createReducer(listsHandler);;

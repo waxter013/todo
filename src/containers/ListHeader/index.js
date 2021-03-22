@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { memo, useState } from 'react';
 /** Eventually replace Toolbar with TopAppBar when the features catch up */
 import {
     Toolbar,
@@ -7,32 +7,38 @@ import {
     ToolbarTitle,
     ToolbarMenuIcon
 } from 'rmwc/Toolbar';
+import { Fab } from 'rmwc/Fab';
 import { connect } from 'react-redux';
 import { getList } from "../getData";
+import { setFocusMode } from "../../store/actions/focusMode";
 
-
-class ListHeader extends Component {
-
-    render () {
-        return (
-            <Toolbar>
-                <ToolbarRow>
-                    <ToolbarSection alignStart>
-                        <ToolbarMenuIcon use="menu" onClick={this.props.openNav}/>
-                        <ToolbarTitle>{this.props.listName}</ToolbarTitle>
-                    </ToolbarSection>
-                </ToolbarRow>
-            </Toolbar>
-        );
-    }
+function ListHeader({ openNav, listName, isFocusMode, startFocusMode }) {
+    return (
+        <Toolbar>
+            <ToolbarRow>
+                <ToolbarSection alignStart>
+                    <ToolbarMenuIcon use="menu" onClick={openNav}/>
+                    <ToolbarTitle>{listName}</ToolbarTitle>
+                </ToolbarSection>
+                <ToolbarSection alignEnd>
+                    {!isFocusMode && (<Fab icon="lightbulb" label="Focus" onClick={() => startFocusMode()}/>)}
+                </ToolbarSection>
+            </ToolbarRow>
+        </Toolbar>
+    );
 }
 
 const mapStateToProps = state => {
-    const {activeList: listId, lists} = state;
+    const {activeList, lists, isFocusMode} = state;
 
     return {
-        listName: getList(lists, listId).get('name'),
+        listName: getList(lists, activeList).get('name'),
+        isFocusMode,
     };
 };
 
-export default connect(mapStateToProps)(ListHeader);
+const mapDispatchToProps = dispatch => ({
+    startFocusMode: () => dispatch(setFocusMode(true))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(memo(ListHeader));

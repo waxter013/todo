@@ -1,7 +1,7 @@
 // import React from 'react';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import ToDoList from "../../components/ToDoList/ToDoList.js";
-import {completeToDo, deleteToDo} from "../../store/actions/todos";
+import { completeToDo, deleteToDo } from "../../store/actions/todos";
 import { getTodos, getList, getVisibleTodos } from "../getData";
 
 
